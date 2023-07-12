@@ -42,6 +42,8 @@
           </tr>
         </tbody>
       </table>
+
+      <button @click="handleLogout">Logout</button>
   
       
     </div>
@@ -86,6 +88,8 @@
           this.mahasiswaData.email = '';
           this.mahasiswaData.prodi = '';
           this.mahasiswaData.jenisKelamin = '';
+
+          alert('Mahasiswa berhasil ditambahkan!');
         } catch (error) {
           console.error(error);
         }
@@ -123,20 +127,36 @@
           this.selectedMahasiswa.email = '';
           this.selectedMahasiswa.prodi = '';
           this.selectedMahasiswa.jenisKelamin = '';
+
+          alert('Mahasiswa berhasil diperbarui!');
         } catch (error) {
           console.error(error);
         }
       },
       async deleteMahasiswa(id) {
+      const confirmed = confirm('Apakah Anda yakin ingin menghapus data?');
+      if (confirmed) { 
         try {
           await axios.delete(`http://localhost:3001/api/${id}`, {
             headers: { Authorization: `Bearer ${this.getToken()}` }
           });
           this.mahasiswas = this.mahasiswas.filter(mahasiswa => mahasiswa._id !== id);
+
         } catch (error) {
           console.error(error);
         }
       }
+      },
+      handleLogout() {
+      const confirmed = confirm('Apakah Anda yakin ingin logout?');
+      if (confirmed) { 
+      // Hapus token dari local storage atau jalankan logika logout sesuai kebutuhan
+      localStorage.removeItem('token');
+      
+      // Redirect ke halaman login
+      this.$router.push('/login');
+      }
+    }
     }
   };
   </script>

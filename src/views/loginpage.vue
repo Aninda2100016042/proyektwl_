@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       credentials: {
-        usernama: '',
+        username: '',
         password: ''
       }
     };
@@ -31,12 +31,17 @@ export default {
         localStorage.setItem('token', token);
 
         console.log(response.data);
-        // Handle successful login, e.g., redirect to another page
+        // Display login success alert
+        window.alert('Login successful.');
+        // Redirect to the appropriate page after alert is closed
+        this.$router.push('/mahasiswa');
       } catch (error) {
         console.error(error);
-        // Handle login error, e.g., display error message
+        // Display login failure alert
+        window.alert('Login failed. Please try again.');
       }
     }
   }
 };
 </script>
+

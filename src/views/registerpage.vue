@@ -26,12 +26,17 @@ export default {
       try {
         const response = await axios.post('http://localhost:3001/api/register', this.credentials);
         console.log(response.data);
-        // Handle successful registration, e.g., redirect to another page
+        // Display registration success alert
+        window.alert('Registration successful. Please proceed to login.');
+        // Redirect to login page after alert is closed
+        this.$router.push('/login');
       } catch (error) {
         console.error(error);
-        // Handle registration error, e.g., display error message
+        // Display registration failure alert
+        window.alert('Registration failed. Please try again.');
       }
     }
   }
 };
 </script>
+
